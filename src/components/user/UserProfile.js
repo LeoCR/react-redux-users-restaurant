@@ -88,7 +88,8 @@ class UserProfile extends React.Component{
     }
     render(){
         return(
-            <div className="container-user-details" style={{margin:'20px 50px'}}>
+            <div className="container-user-details">
+                <h1>User Profile</h1>
                 <form onSubmit={this.onSubmitProfile} id="form-profile"> 
                     <label htmlFor="username">Username: </label>
                     <input value={this.state.username} name="username" id="username" onChange={(e)=>this.onChangeUsername(e)}/>
@@ -102,11 +103,10 @@ class UserProfile extends React.Component{
                     <label htmlFor="email">Email:</label>
                     <input value={this.state.email} name="email" id="email" onChange={(e)=>this.onChangeEmail(e)}/>
                     <button type="submit" className="btn btn-success">Update</button>
+                    <button id="btn-logout" onClick={(e)=>this.logOut(e)} className="btn btn-danger">
+                        Logout
+                    </button>
                 </form>
-                
-                <button id="btn-logout" onClick={(e)=>this.logOut(e)} className="btn btn-danger">
-                    Logout
-                </button>
             </div>
         )
     }
