@@ -23,7 +23,6 @@ class Login extends React.Component{
         });
         setTimeout(() => {
             $('body').toggleClass('modal-opened');
-            $('.modal').css({'display':'block'});
         }, 400);
     }
     render(){

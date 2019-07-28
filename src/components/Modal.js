@@ -26,10 +26,8 @@ class Modal extends React.Component{
         $('.modal').css({'display':'none'});
         $('body').toggleClass('modal-opened');
     } 
-    checkout=(e)=>{
-        $('.modal').css({'display':'none'});
-        $('body').toggleClass('modal-opened');
-        //window.location.replace("http://localhost:49652/checkout");
+    checkout=()=>{
+        window.location.replace("/checkout");
     }
     render(){
         var ModalContent,titleModal;

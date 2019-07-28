@@ -3,6 +3,7 @@
 	float: left;
     width: 100%;
     padding-top: 120px;
+    background: #fff;
 }
 #user-root{
     width: 100%;
@@ -10,6 +11,7 @@
     height: auto;
     float: left;
     z-index: 99;
+    background: #fff;
 }
 .modal{
     background: rgba(0, 0, 0, 0.8) none repeat scroll 0% 0%;
