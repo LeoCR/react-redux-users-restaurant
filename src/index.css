@@ -2,16 +2,16 @@
 	position: relative;
 	float: left;
     width: 100%;
-    padding-top: 120px;
-    background: #fff;
+    padding: 160px 60px;
+    background:url("/images/bg/tacos.jpg") no-repeat center center;
+    min-height: 900px;
 }
 #user-root{
     width: 100%;
     position: relative;
     height: auto;
     float: left;
-    z-index: 99;
-    background: #fff;
+    z-index: 99; 
 }
 .modal{
     background: rgba(0, 0, 0, 0.8) none repeat scroll 0% 0%;
@@ -34,18 +34,36 @@ background: #000000 !important;
 color: #ffffff !important;
 }
 .nav-tabs{
-    max-width: 300px;
+    max-width: none;
     margin: 0;
     float: left;
-    position: relative;
+    position: relative;width: 100%;
+    border:none !important;
 }
 .nav-tabs > li.tab-link{
-    display: contents !important;
+    display: block !important;
+    max-width: 130px;
+    background: transparent !important;
+    margin: 0 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.nav-tabs > li.tab-link>a{
+    background: black;
+}
+.nav > li.tab-link > a:focus, .nav > li.tab-link > a:hover{
+    background: rgb(232, 102, 49);
+}
+.nav-tabs > li > a{
+    color: #fff !important;
+    border: none !important;
 }
 .tabs-content {
 	max-width: 700px;
 	margin: 0 auto;
     float: left;
+    padding: 30px 70px;
+    background: #fff;
 }
 @media screen and (max-width:800px){
     .nav-tabs > li.tab-link{
