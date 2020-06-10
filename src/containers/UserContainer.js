@@ -4,8 +4,7 @@ import history from '../history';
 import UserProfile from '../components/user/UserProfile';
 import UserHistory from '../components/user/UserHistory';
 import UserInvoice from "../components/user/UserInvoice";
-class UserContainer extends React.Component{
-    render(){
+const UserContainer=()=>{
         return(
             <React.Fragment>
                 <Router history={history}>
@@ -48,7 +47,6 @@ class UserContainer extends React.Component{
                 </Router>
             </React.Fragment>
         )
-    }
 }
 
 export default UserContainer;
