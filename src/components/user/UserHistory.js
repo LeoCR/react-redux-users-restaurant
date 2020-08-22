@@ -1,23 +1,22 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import {connect} from "react-redux";
 import api from "../../apis/api";
 import {Link} from "react-router-dom";
-class UserHistory extends React.Component{
-    state={
-        invoices:[]
-    }
-    componentDidMount=async()=>{
-        await api.get('/api/get-invoices/'+this.props.user.id)
+export const UserHistory =props=>{
+    const [invoices,setInvoices]=useState([]);
+    const fetchInvoices=async()=>{
+        await api.get('/api/get-invoices/'+props.user.id)
         .then((res)=>{
             if(res.data.length>0){
-                this.setState({
-                    invoices:res.data
-                })        
+                setInvoices(res.data)        
             }
         });
     }
-    getInvoices=()=>{
-        if(this.state.invoices.length>0){
+    useEffect(()=>{
+        fetchInvoices();
+    },[invoices])
+    const getInvoices=()=>{
+        if(invoices.length>0){
             return(
                 <div className="table-responsive">
                     <table className="table">
@@ -29,7 +28,7 @@ class UserHistory extends React.Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.invoices.map((inv)=>
+                            {invoices.map((inv)=>
                                     <tr>
                                         <td>{inv.order_code}</td>
                                         <td>{inv.date_of_billing.replace('.000Z','')}</td>
@@ -41,15 +40,22 @@ class UserHistory extends React.Component{
                 </div>
           )  
         }
+        else{
+            return(
+                <React.Fragment>
+                    <p>You don't have any purchase</p>
+                </React.Fragment>
+            )
+        }
     }
-    render(){
-        return(
-            <React.Fragment>
-                <h1>User History</h1>
-                {this.getInvoices()}
-            </React.Fragment>
-        )
-    }
+    
+    return(
+        <React.Fragment>
+            <h1>User History</h1>
+            {getInvoices()}
+        </React.Fragment>
+    )
+    
 }
 const mapStateToProps=(state)=>{
     return{

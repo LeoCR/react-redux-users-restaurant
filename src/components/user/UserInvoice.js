@@ -1,23 +1,24 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import {connect} from "react-redux";
 import api from "../../apis/api";
-class UserInvoice extends React.Component{
-    state={
-        orderProducts:[]
-    }
-    componentDidMount=async()=>{
-        const {order_code}=this.props.match.params;
-        await api.get('/api/invoice/show/products/'+order_code+'/'+this.props.user.username+'/'+this.props.user.id)
+import { withRouter } from "react-router";
+const UserInvoice=props=>{
+    const [orderProducts,setOrderProducts]=useState([]);
+    const fetchOrders=async()=>{
+        const {order_code}=props.match.params;
+        await api.get('/api/invoice/show/products/'+order_code+'/'+props.user.username+'/'+props.user.id)
         .then((res)=>{
-            this.setState({
-                orderProducts:res.data
-            })
+            setOrderProducts(res.data)
         })
     }
-    renderProductsOrder=()=>{
+    useEffect(()=>{
+        fetchOrders();
+    },[orderProducts])
+    
+    const renderProductsOrder=()=>{
         var totalPrice=0;
-        if(this.state.orderProducts.length>0){
-            this.state.orderProducts.forEach(product => {
+        if(orderProducts.length>0){
+            orderProducts.forEach(product => {
                 totalPrice+=parseFloat(product.total)
             });
             return( 
@@ -32,7 +33,7 @@ class UserInvoice extends React.Component{
                         </thead>
                         <tbody>
                             {
-                                this.state.orderProducts.map((order)=>
+                                orderProducts.map((order)=>
                                         <tr>
                                             <td>{order.product_name}</td>
                                             <td>{order.product_quantity}</td>
@@ -54,18 +55,17 @@ class UserInvoice extends React.Component{
             )
         }
     }
-    render(){
-        return(
-            <React.Fragment>
-                <h1>Invoice</h1>
-                {this.renderProductsOrder()}
-            </React.Fragment>
-        )
-    }
+    return(
+        <React.Fragment>
+            <h1>Invoice</h1>
+            {(orderProducts.length>0)?renderProductsOrder():<p>You don't have invoices</p>}
+        </React.Fragment>
+    )
+    
 }
 const mapStateToProps=(state)=>{
     return{
       user:state.user.user
     }
 }
-export default connect(mapStateToProps)(UserInvoice);
+export default withRouter(connect(mapStateToProps)(UserInvoice));

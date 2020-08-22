@@ -14,28 +14,10 @@ class UserProfile extends React.Component{
             password:''
         }
     }
-    onChangeUsername=(e)=>{
+    onChange=(e)=>{
         e.preventDefault();
         this.setState({
-            username:e.target.value
-        });
-    }
-    onChangeFirstName=(e)=>{
-        e.preventDefault();
-        this.setState({
-            firstName:e.target.value
-        });
-    }
-    onChangeLastName=(e)=>{
-        e.preventDefault();
-        this.setState({
-            lastName:e.target.value
-        });
-    }
-    onChangeEmail=(e)=>{
-        e.preventDefault();
-        this.setState({
-            email:e.target.value
+            [e.target.name]:e.target.value
         });
     }
     onSubmitProfile=(e)=>{
@@ -92,16 +74,16 @@ class UserProfile extends React.Component{
                 <h1>User Profile</h1>
                 <form onSubmit={this.onSubmitProfile} id="form-profile"> 
                     <label htmlFor="username">Username: </label>
-                    <input value={this.state.username} name="username" id="username" onChange={(e)=>this.onChangeUsername(e)}/>
+                    <input value={this.state.username} name="username" id="username" onChange={(e)=>this.onChange(e)}/>
 
                     <label htmlFor="firstName">First Name: </label>
-                    <input value={this.state.firstName} name="firstName" id="firstName" onChange={(e)=>this.onChangeFirstName(e)}/>
+                    <input value={this.state.firstName} name="firstName" id="firstName" onChange={(e)=>this.onChange(e)}/>
 
                     <label htmlFor="lastName">Last Name: </label>
-                    <input value={this.state.lastName} name="lastName" id="lastName" onChange={(e)=>this.onChangeLastName(e)}/>
+                    <input value={this.state.lastName} name="lastName" id="lastName" onChange={(e)=>this.onChange(e)}/>
 
                     <label htmlFor="email">Email:</label>
-                    <input value={this.state.email} name="email" id="email" onChange={(e)=>this.onChangeEmail(e)}/>
+                    <input value={this.state.email} name="email" id="email" onChange={(e)=>this.onChange(e)}/>
                     <button type="submit" className="btn btn-success">Update</button>
                     <button id="btn-logout" onClick={(e)=>this.logOut(e)} className="btn btn-danger">
                         Logout
